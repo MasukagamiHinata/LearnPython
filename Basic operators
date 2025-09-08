@@ -50,3 +50,9 @@ big_list = x_list + y_list
 print(x_list)
 print(y_list)
 print(big_list)
+
+#リストの作成にはforループを使ってもいいかもしれない
+x_list = [x for x in range(10)]
+y_list = [10 + y for y in range(10)]
+print(x_list)
+print(y_list)
