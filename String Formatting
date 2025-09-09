@@ -1,0 +1,35 @@
+#演算子%と引数指定子(%sや%dなど)の使用例
+name = "John"
+print("Hello, %s!" % name)
+
+#二つ以上の引数指定子を用いる場合はタプルを使う
+name = "John"
+age = 21
+print("%s is %d years old" %(name, age)) # %(name, age)
+
+#文字列でないオブジェクトに対してもフォーマット可能。例えば数値のリスト
+mylist = [2, 3, 4]
+print("He has %d apples" % mylist[2])
+
+# %s - 文字列(または数値のような文字列表現を持つオブジェクト)
+#  →数値は文字列としても扱えるということ？2進数や16進数ならなんとなくわかるけど。
+# %d - 整数
+#  →integerなのに%iじゃないんだな？
+# %f - 浮動小数点数
+# %.<桁数>f - ドットの右側に一定の桁数を持つ浮動小数点数。
+# %x/%X - 16進数表現（小文字/大文字）の整数。
+
+#exercise
+#You will need to write a format string which prints out the data using the following syntax: 
+# Hello John Doe. Your current balance is $53.44.
+data = ("John", "Doe", 53.44)
+format_string = "Hello %s %s. Your current balance is $%s."
+print(format_string % data)
+
+#53.44は%.2fでも表せるけれど全部%sでよいのは便利そう。文字列に自動で変換してくれるってことね。
+#タプルの左から順に処理してくれる仕様は知らなかった。
+
+#fstringを用いて以下のようにも表せる。問題の趣旨からもそこまで外れてないのでは。
+#個人的にはこちらの方が読みやすくてよいと感じる。
+data = ("John", "Doe", 53.44)
+print(f'Hello, {data[0]} {data[1]}. Your current balance is ${data[2]}')
