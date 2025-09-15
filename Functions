@@ -1,0 +1,37 @@
+#関数の定義と呼び出し
+def my_function():
+    print("my function")
+my_function()
+#output: my function
+
+def my_function_with_args(username, greeting):
+    print("Hello, %s, from my function!, I wish you %s" %(username, greeting))
+my_function_with_args("hinata", "the best") 
+#output: Hello, Hinata, from my function!, I wish you the best
+
+def sum_two_numbers(a, b):
+    return a + b    
+sum_two_numbers(1, 2) 
+#output: 3
+
+
+#Exercise
+def list_benefit():
+    return "More organized code", "More readable code", "Easier code reuse",\
+           "Allowing programmers to share and connect code together"
+
+def build_sentence(benefit):
+    return "%s is a benefit of function." % benefit
+
+def sentence():
+    list_of_benefit = list_benefit()
+    for benefit in list_of_benefit:
+        print(build_sentence(benefit))
+
+sentence()
+
+#output:
+# More organized code is a benefit of functions.
+# More readable code is a benefit of functions.
+# Easier code reuse is a benefit of functions.
+# Allowing programmers to share and connect code together is a benefit of functions.
