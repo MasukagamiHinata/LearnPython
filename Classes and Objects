@@ -1,0 +1,91 @@
+#クラスはオブジェクトを作成するためのテンプレート
+class MyClass:
+    variables = "blah"
+    def function(self): #なぜselfが必要？
+        print("This is a message inside the class.")
+
+myobjectx = MyClass() 
+#上記のクラスをオブジェクトに割り当てる
+#これで、変数 "myobjectx "は、変数と "MyClass "というクラス内で定義された関数を含む、
+#"MyClass "というクラスのオブジェクトを保持することになる。
+
+myobjectx.variables #新しく作成されたオブジェクト "myobjectx"内の変数にアクセスする
+print(myobjectx.variables) #文字列"blah"が出力される
+#output: blah
+
+myobjectx.function() #MyClassのfunctionメソッドを呼び出す
+print(myobjectx.function()) #functionメソッドにはreturn文がないので、Noneを呼び出し元(print(myob...))に返す
+#メソッド内部のprintによってThis is...が、外部のprint(myob...)でNoneが出力される。
+#output: This is a message inside the class., None
+
+
+#同じクラス（同じ変数と関数が定義されている）の異なるオブジェクトを複数作成できる。
+#ただし、各オブジェクトはクラス内で定義された変数の独立したコピーを含む。
+class MyClass:
+    variable = "blah"
+
+    def function(self):
+        print("This is a message inside the class.")
+
+myobject_x = MyClass()
+myobject_y = MyClass()
+
+myobject_y.variable = "yackity" #ここで変更すると...
+
+print(myobject_x.variable) #blah
+print(myobject_y.variable) #yackity
+
+#オブジェクト内の関数にアクセスするには、変数にアクセスするのと同じような記法を使う
+class MyClass:
+    variable = "blah"
+
+    def function(self):
+        print("This is a message inside the class")
+
+myobject_x = MyClass()
+myobject_x.function()
+
+
+#init__()関数は、クラスが開始されるときに呼び出される特別な関数。
+#クラスの値を代入するために使用される
+class NumberHolder:
+
+    def __init__(self, number):
+        self.number = number
+
+    def returnNumber(self):
+        return self.number
+
+var = NumberHolder(7)
+print(var.returnNumber())
+#この例だと意義があんまりよくわからないな
+
+
+#Exercise
+#車両用のクラスが定義されている。car1とcar2という2つの新しい乗り物を作ります。
+#car1を$60,000.00の赤のオープンカー(convertible)、名前をFerとし、car2を$10,000.00の青のバン(van)、名前をJumpとします。
+class Vehicle():
+    name = ""
+    color = ""
+    kind = "car"
+    value = 100.00
+    def desc(self):
+        car_desc = f"{self.name} is a {self.color} {self.kind} worth ${self.value}."
+        return car_desc
+
+car1 = Vehicle()
+car1.name = "Fer"
+car1.color = "red"
+car1.kind = "convertible"
+car1.value = 60000.00
+
+car2 = Vehicle()
+car2.name = "Jump"
+car2.color = "blue"
+car2.kind = "van"
+car2.value = 10000.00
+
+print(car1.desc())
+print(car2.desc())
+
+#エクササイズで初めてクラスの便利さを理解した。
