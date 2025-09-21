@@ -1,0 +1,128 @@
+#モジュールとは、特定の機能を持つソフトウェアの一部
+#各モジュールは異なるファイルで構成され、別々に編集することができる
+#Pythonのモジュールは拡張子が.pyのPythonファイルです。モジュール名はファイル名と同じ
+#Python モジュールには、関数、クラス、変数のセットを定義し、実装することができる
+#例えば
+
+#game.py
+#import the draw module
+import draw
+
+def play_games():
+    ...
+
+def main():
+    result = play_game()
+    draw.draw_game(result)
+
+if __name__ == '__main__':
+    main()
+
+#drawモジュールは以下のように書ける
+def draw_game():
+    ...
+
+def clear_screen(screen):
+    ...
+
+#この例では、ゲームモジュールがdrawモジュールをインポートすることで、そのモジュールで実装された関数を利用できるように
+#main関数はローカル関数play_gameを使用してゲームを実行し、その後drawモジュールで実装されたdraw_game関数を用いてゲー
+#ムの結果を描画する。drawモジュールのdraw_game関数を使用するには、ドット演算子を用いて関数が実装されているモジュール
+#を指定する必要がある。ゲームモジュールからdraw_game関数を参照するには、drawモジュールをインポートし、その後
+#draw.draw_game()を呼び出す必要がある。
+
+
+#namespaceへのモジュールのインポート
+#namespaceとはPythonにおいてすべてのオブジェクトに名前が付けられアクセス可能なシステムのこと
+#fromコマンドを使用して、関数draw_gameをメインスクリプトのnamespaceにインポートする
+
+#game.py
+#import the draw module
+from draw import draw_game
+
+def main():
+    result = play_game()
+    draw_game(result)
+
+#モジュール名(draw.)が先にこないのは、importコマンドでモジュール名を指定しているから。
+#同じモジュールを繰り返し参照する必要がないので、楽。
+#ただし名前空間は2つ以上の同じ名前のオブジェクトを持つことができないため、
+#importコマンドで既存のものが書き換えられる危険あり
+
+
+#条件分岐により、同じ名前のモジュールでも異なる挙動を実現できる
+if visual_mode:
+    import draw_visual as draw
+else:
+    import draw_textual as draw
+
+def main():
+    result = play_game()
+    #visual_modeの設定に応じてvisualかtextualかが決まるようになった
+    draw.draw_game(result)
+
+
+#モジュール内のローカル変数は「シングルトン」として振る舞い、一度だけ初期化される
+#シングルトンとは、アプリケーション全体で1つしか存在しないことが保証される(何によって？)オブジェクトのこと
+#draw.py
+def draw_game():
+    clear_screen(main_screen)
+    ...
+
+def clear_screen(screen):
+    ...
+
+class Screen():
+    ...
+
+#「シングルトン」としてmain_screenを初期化
+main_screen = Screen()
+
+#モジュールを検索する場所を指定する方法はいくつかある。例えばPYTHONPATH
+#sys.path.append()を使うやり方も
+
+
+#Pythonでモジュールを探索する際に非常に役立つのがdir関数とhelp関数
+#URLからデータを読み取ることを可能にするurllibモジュールをインポートするには、次のようにする
+import urllib
+help(urllib) #モジュールに関する詳細の書かれたドキュメントのURLが出てくる
+dir() #urllibが見つかる。urllibモジュールが現在の名前空間に読み込まれたことを意味する
+
+
+#パッケージとは、複数のモジュールを整理するための仕組み
+#パッケージの役割
+#名前空間の提供: 
+#   パッケージは、モジュールやサブパッケージの論理的な階層構造を形成し、名前の衝突を防ぐ。
+#   たとえば、foo.barというモジュールは、fooパッケージ内のbarモジュールであることを明確に示す。
+#モジュールの整理: 
+#   関連するモジュールをひとつのディレクトリにまとめることで、プロジェクトの構造を整理し、管理しやすくする。
+#インポートの管理: 
+#   __init__.pyファイルは、パッケージがインポートされたときに実行され、パッケージレベルの初期化処理を行ったり、
+#   パッケージの公開APIを定義したりするのに使われる。
+
+#fooというディレクトリに__init__.pyファイルとbar.pyモジュールがある場合、barモジュールをインポートする方法は主に2つ
+import foo.bar
+
+from foo import bar
+
+#また、特定の関数やクラスだけをインポートすることも可能。
+from foo.bar import MyClass
+
+
+#__init__.pyファイルでは、__all__変数をオーバーライドすることで、パッケージがAPIとしてエクスポートするモジュールを決定
+__init__.py
+__all__ = ["bar"]
+
+
+#Exercise
+#reモジュール内のすべての関数の中から、findという単語を含むものをアルファベット順に並べ替えてリストとして出力
+import re
+help(re)
+dir(re)
+#このモジュールは正規表現マッチング操作を提供する
+find_members = []
+for member in dir(re):
+    if "find" in member:
+        find_members.append(member)
+
+print(sorted(find_members))
