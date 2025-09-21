@@ -1,0 +1,56 @@
+Python
+
+#arraysに似ているが異なるデータ型。インデックスではなくキーを使用して要素にアクセスする
+d = {'key1': 1, 'key2': 2, 'key3': 3}
+
+phonebook = {}
+phonebook["Jack"] = 2233
+phonebook["Joe"] = 3344
+phonebook["Bill"] = 4455 #これらがキーと値
+print(phonebook) 
+
+#異なる書き方もできる
+phonebook = {
+    "Jack" : 2233,
+    "Joe" : 3344,
+    "Bill" : 4455
+}
+print(phonebook)
+
+#forループでアクセス
+#リストのように値の順序を格納しないので、以下のような構文でアクセスする
+phonebook = {"Jack" : 2233, "Joe" : 3344, "Bill" : 4455}
+for name, number in phonebook.items(): #.items()メソッドによりキーと値の両方にアクセス
+    print("Phone number of %s is %d" % (name, number))
+
+#そのままforループを回すとキーのみ表示される
+for key in phonebook:
+    print(key)
+
+
+#辞書から要素を削除するには以下のようにする
+phonebook = {"Jack" : 2233, "Joe" : 3344, "Bill" : 4455}
+del phonebook["Jack"]
+print(phonebook) #"Joe" : 3344, "Bill" : 4455
+
+#popメソッドでも可能
+phonebook = {"Jack" : 2233, "Joe" : 3344, "Bill" : 4455}
+phonebook.pop("John") #ここはタプル
+
+
+#Exercise
+#Add "Jake" to the phonebook with the phone number 938273443, and remove Jill from the phonebook.
+phonebook = {  
+    "John" : 938477566,
+    "Jack" : 938377264,
+    "Jill" : 947662781
+}  
+phonebook["Jake"] = 938273443
+del phonebook["Jill"]
+
+# testing code
+if "Jake" in phonebook:  
+    print("Jake is listed in the phonebook.")
+    
+if "Jill" not in phonebook:      
+    print("Jill is not listed in the phonebook.")
