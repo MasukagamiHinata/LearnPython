@@ -1,0 +1,69 @@
+#input関数
+# 引数 prompt が存在すれば、それが末尾の改行を除いて標準出力に書き出されます。
+# 次に、この関数は入力から 1 行を読み込み、文字列に変換して (末尾の改行を除いて) 返します。 
+# EOF が読み込まれたとき、 EOFError が送出されます
+# (公式マニュアルより)
+
+astring = input("Python") #インタラクティブシェルで"Python"が確認できる
+astring #input()とastringが並んで表示されるのでPythonastringという風に見える
+
+name = input("お名前は？ ") #インタラクティブシェルに「お名前は？」と表示される
+Hinata #名前を入力すると...
+print(f"こんにちは、{name}さん！") #出力は「こんにちは、Hinataさん！」となる
+
+#引数はオプションであり、input()のように引数を省略することも可能。
+#この場合、プロンプトは表示されず、ただ入力待ちの状態になる。
+#返り値は常に文字列(str)。この場合nameには文字列である「Hinata」が代入される。
+name #'Hinata'
+
+#input関数の返り値を数値として扱うならintやfloatで型変換する必要がある。
+num = int(input())
+25
+print(num + 5) #30になる
+
+decimalnum = input()
+32
+decimalnum #'32'
+
+decimalnum = float(input())
+32
+decimalnum #'32.0'
+
+
+#スペースで区切られた1行から、2つ以上のデータタイプを入力として受け取るには？
+#split() 関数と map() 関数を使用する。
+#最初の行に2つの整数を、3行目に2つ以上の整数を入力する
+a, b = map(int, input().split())
+5 10
+array = input().split()
+1 2 3 4 5 6
+sum = 0
+for each in array:
+    sum = sum + int(each)
+#最初の行の最初の2つの整数と、2行目の整数の合計を出力する
+print(a, b, sum ) #5 10 21
+
+a = 5
+b = 0.53
+c = "hello"
+print("a is : %d, b is %.4f, c is %s" % (a, b, c))
+print(f"a is {a},  b is {b}, c is {c}")
+
+
+#Exercise
+#Write a program that asks the user to input their name, age, and country.
+
+#Taking the name input using input()
+name = input("Enter your name: ")
+Hinata
+
+#Taking the age input using input() and converting it to integer
+age = int(input("Enter your age: "))
+22
+
+#Taking the country input using input()
+country = input("Enter your country: ")
+Japan
+
+#Displaying the formatted sentence with name, age, and country
+print(f"Hello, my name is {name}, I am {age} years old, and I am from {country}.")
