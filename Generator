@@ -1,0 +1,57 @@
+#ジェネレータとは、
+#「generator iterator」というオブジェクトを返す関数
+#通常の関数に似ていますが、 「yield」式を持つ点で異なります。 
+#yield式は、forループで使用できたり、next()関数で値を1つずつ取り出せる値の並びを生成するのに使用されます。
+#通常はジェネレータ関数を指しますが、文脈によっては「ジェネレータイテレータ」を指す場合があります。 
+#意図された意味が明らかでない場合、 明瞭化のために完全な単語を使用します。
+
+#各yieldは一時的に処理を中断し、実行状態（ローカル変数や保留中のtryステートメントを含む）を記憶します。
+#ジェネレータイテレータが再開すると、（呼び出しのたびに新たに開始する関数とは対照的に）中断したところから再開します。
+#yield式は関数定義の本体でのみ使えます。
+#(ドキュメントより)
+
+
+
+#実際に用いてみる
+
+#randomモジュールをインポート
+import random
+
+#7つの整数を返す関数を定義する
+def lottery():
+    for i in range(6):
+        yield random.randint(1, 40)
+    #7番目の整数は1以上12以下のどれかとする    
+    yield random.randint(1, 12)
+
+for random_number in lottery():
+    print(f"And the next number is ... {random_number}")
+    #こうして7つのランダムな整数が生成される。これらは「ジェネレータイテレータ」というオブジェクト
+
+#この関数は、ランダムな数字をどのように生成するかを独自に判断し、
+#各yield文を1つずつ実行し、その間にメインのforループに実行を戻して一時停止します。
+#(教材より。yieldを実行している間にforループに実行を戻す、って、なぜ？実行時間短縮のため？)
+
+
+#Exercise
+#フィボナッチ数列を返すジェネレーター関数を書いてください
+def fibonacci():
+    a, b = 1, 1
+    while 1:
+        yield a
+        a, b = b, a+b 
+
+
+
+#フィボナッチ数列を返すだけなら以下のようにも書ける
+#これだと計算量が大きいのかな。
+def fibonacci_sub(n):
+    if n <= 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fibonacci_sub(n-1) + fibonacci_sub(n-2)
+
+for i in range(10):
+    print(fibonacci_sub(i))
