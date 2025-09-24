@@ -1,0 +1,28 @@
+#Python
+
+#特定の文章内の各単語の長さを指定する整数のリストを作成する
+#ただし、単語が「the」でない場合に限る
+sentence = "the quick brown fox jumps over the lazy dog"
+words = sentence.split()
+word_length = []
+for word in words:
+    if word != "the":
+        word_length.append(len(word))
+print(words)
+print(word_length)
+
+#リスト内包表記を用いると簡潔に書ける
+#でも複雑な文だとむしろわかりにくく、使いにくくなりそう
+#また大量のデータに対して行うとメモリを一度にたくさん使う(リストなので)から少し注意が必要なのかも？
+#メモリを気にする場合はジェネレータが有用か
+sentence = "the quick brown fox jumps over the lazy dog"
+words = sentence.split()
+word_length = [len(word) for word in words if word != "the"]
+print(word_length)
+
+#Exercise
+#リスト内包表記を使用して、リスト「numbers」から「newlist」という新しいリストを作成し、
+#その中には元のリストからの正の数のみを整数として含めてください。
+numbers = [34.6, -203.4, 44.9, 68.3, -12.2, 44.6, 12.7, 0.9, -0.1]
+newlist = [int(i) for i in numbers if i > 0] 
+print(newlist)
